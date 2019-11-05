@@ -2,7 +2,7 @@
 api to post and search tweets, developed in python, using flask.
 
 ### Requirements
-- pip3 instal flask
+- pip3 install flask
 - pip3 install oauth2
 - pip3 install json
 
