@@ -3,7 +3,6 @@
 import oauth2
 import json 
 import urllib.parse
-import pprint
 
 class Twitter:
 
@@ -22,6 +21,12 @@ class Twitter:
         request = self.__class__.client.request("https://api.twitter.com/1.1/statuses/update.json?status="+str(text_codefy),method='POST')
         request_decode = request[1].decode()
         request_object = json.loads(request_decode)
+        
+        if "errors" in request_object:
+            request_object["status"] = False
+        else:
+            request_object["status"] = True
+
         return request_object
         
 
@@ -40,6 +45,3 @@ class Twitter:
             response_array.append({"user": user, "text": text})
 
         return {"status": True, "response": response_array}
-
-# twitter = Twitter()
-# pprint.pprint(twitter.post(text="Hello world"))
