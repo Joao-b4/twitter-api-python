@@ -17,7 +17,11 @@ class Twitter:
     client = oauth2.Client(consumer,token)
 
     def post(self, text = ""):
+        text = text.replace("/","-")
+        text = text.encode("UTF-8")
+
         text_codefy = urllib.parse.quote(text, safe="")
+       
         request = self.__class__.client.request("https://api.twitter.com/1.1/statuses/update.json?status="+str(text_codefy),method='POST')
         request_decode = request[1].decode()
         request_object = json.loads(request_decode)
@@ -31,7 +35,10 @@ class Twitter:
         
 
     def search(self, query = ""):
+        query = query.encode("UTF-8")
+
         query_codefy = urllib.parse.quote(query, safe="")
+
         request = self.__class__.client.request("https://api.twitter.com/1.1/search/tweets.json?q="+str(query_codefy))
         request_decode = request[1].decode()
         request_object = json.loads(request_decode)

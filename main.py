@@ -7,13 +7,15 @@ from twitter import Twitter
 def server():
     app = Flask(__name__)
 
-    @app.route("/post", methods=["GET"])
+    @app.route("/post", methods=["POST"])
     def post_twitt():
-        text = request.args.get("text", "")
-            
-        if(text == None or len(text) <= 1):
-            return {"status":False}
+        text = request.json # receiver json = {"text": "Text Content Here"}
 
+        if("text" not in text or len(text["text"]) < 1):
+            return {"status":False}
+        
+        text = text["text"]
+    
         twitter = Twitter()
         return twitter.post(text = text)
 
