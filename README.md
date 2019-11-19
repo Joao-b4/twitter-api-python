@@ -14,6 +14,7 @@ api to post and search tweets, developed in python, using flask.
 - python main.py
 
 ### Routes
-- GET:  http://127.0.0.1/post?text=HereTextPost
+- POST:  http://127.0.0.1/post?text=HereTextPost
+    - Body:  {"text": "status content here"}
 - GET:  http://127.0.0.1/search?query=HereTextQuery
 
